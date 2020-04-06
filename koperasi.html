@@ -12,9 +12,9 @@
                 <h1>Koperasi App</h1>
                 <div data-role='navbar'>
                     <ul>
-                        <li><a href="#" data-icon="home">Home</a></li>
+                        <li><a href="#home" data-icon="home">Home</a></li>
                         <li><a href="#" data-icon="gear">Pinjaman</a></li>
-                        <li><a href="#" data-icon="info">Info Pinjaman</a></li>
+                        <li><a href="#info" data-icon="info">Info Pinjaman</a></li>
                     </ul>
                 </div>
             </div>
@@ -22,6 +22,34 @@
                 <p>Selamat Datang di Aplikasi Koperasi X</p>
                 <div class="box">
                     <h3>Swipe ke Kanan untuk melanjutkan!</h3>
+                </div>
+            </div>
+        </div>
+        <div data-role='page' id='info'>
+            <div data-role='header'>
+                <h1>Koperasi App</h1>
+                <div data-role='navbar'>
+                    <ul>
+                        <li><a href="#home" data-icon="home">Home</a></li>
+                        <li><a href="#" data-icon="gear">Pinjaman</a></li>
+                        <li><a href="#info" data-icon="info">Info Pinjaman</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div role="main" class="ui-content">
+                <h1>Info Pinjaman</h1>>
+                <div data-role="content">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Pinjaman</th>
+                                <th>Waktu Pinjaman</th>
+                                <th>Total Pengembalian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -34,5 +62,5 @@
         function swipeHandler(event){
             $(event.target).addClass("swipe");
         }
-    }
+    });
 </script>
