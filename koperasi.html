@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Koperasi</title>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+	    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    </head>
+    <body>
+        <div data-role='page' id='home'>
+            <div data-role='header'>
+                <h1>Koperasi App</h1>
+                <div data-role='navbar'>
+                    <ul>
+                        <li><a href="#" data-icon="home">Home</a></li>
+                        <li><a href="#" data-icon="gear">Pinjaman</a></li>
+                        <li><a href="#" data-icon="info">Info Pinjaman</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div role='main' class='ui-content'>
+                <p>Selamat Datang di Aplikasi Koperasi X</p>
+                <div class="box">
+                    <h3>Swipe ke Kanan untuk melanjutkan!</h3>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+    $(function(){
+        $("div.box").on("swipe", swipeHandler);
+        function swipeHandler(event){
+            $(event.target).addClass("swipe");
+        }
+    }
+</script>
