@@ -12,8 +12,8 @@
                 <h1>Koperasi App</h1>
                 <div data-role='navbar'>
                     <ul>
-                        <li><a href="#" data-icon="home">Home</a></li>
-                        <li><a href="#" data-icon="gear">Pinjaman</a></li>
+                        <li><a href="#home" data-icon="home">Home</a></li>
+                        <li><a href="#input" data-icon="gear">Pinjaman</a></li>
                         <li><a href="#" data-icon="info">Info Pinjaman</a></li>
                     </ul>
                 </div>
@@ -25,14 +25,75 @@
                 </div>
             </div>
         </div>
+        <div data-role='page' id='input'>
+            <div data-role='header'>
+                <h1>Koperasi App</h1>
+                <div data-role='navbar'>
+                    <ul>
+                        <li><a href="#home" data-icon="home">Home</a></li>
+                        <li><a href="#input" data-icon="gear">Pinjaman</a></li>
+                        <li><a href="#" data-icon="info">Info Pinjaman</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div role='main' class='ui-content'>
+                <label for='name'>Masukkan Nama Pengaju Pinjaman</label>
+                <input type='text' name='name' id='name' value=''>
+                <label for='jumlah'>Masukkan Jumlah Pinjaman</label>
+                <input type='number' name='jumlah' id='jumlah' value=''>
+                <label for='waktu'>Masukkan Waktu Pinjaman (bulan)</label>
+                <input type='range' name='waktu' id='waktu' value='1' min='1' max='24'>
+                <button id='hitung'>Ajukan Pinjaman!</button>
+                <label for='akhirtotal'>Total Pinjaman:</label>
+                <input type='number' name='akhirtotal' id='akhirtotal'>
+            </div>
+        </div>
     </body>
-</html>
+    <script>
+        $(function(){
+            $("div.box").on("swipe", swipeHandler);
+            function swipeHandler(event){
+                $(event.target).addClass("swipe");
+            }
+        });
 
-<script>
-    $(function(){
-        $("div.box").on("swipe", swipeHandler);
-        function swipeHandler(event){
-            $(event.target).addClass("swipe");
-        }
-    }
-</script>
+        $(document).ready(function(){
+            var count = 0;
+            var nama=[];
+            var pinjaman=[];
+            var waktu=[];
+            var total=[]
+            $("#hitung").click(function(){
+                var input0=$("#name").val();
+                var input1=$("#jumlah").val();
+                var input2=$("#waktu").val();
+                nama.push(input0)
+                pinjaman.push(input1)
+                waktu.push(input2)
+
+                if(input0 == '' || input1 == 0 || input2 == 0)
+                {
+                    alert("ERROR! Masukkan input terlebih dahulu")
+                    document.getElementById("nama").val();
+                    document.getElementById("jumlah").val();
+                    document.getElementById("waktu").val();
+                }
+                else {
+                    if (waktu[count]<=6){
+                        total[count]=parseInt(pinjaman[count])+parseInt(pinjaman[count])*0.02*parseInt(waktu[count]);
+                    }
+                    else if(waktu[count]<=12){
+                        total[count]=parseInt(pinjaman[count])+parseInt(pinjaman[count])*0.015*parseInt(waktu[count]);
+                    }else if(waktu[count]>12){
+                        total[count]=parseInt(pinjaman[count])+parseInt(pinjaman[count])*0.01*parseInt(waktu[count]);
+                    }
+                    document.getElementById("akhirtotal").innerHTML=total[count];
+                    count++;
+                    document.getElementById("nama").innerHTML="";
+                    document.getElementById("jumlah").innerHTML="";
+                    document.getElementById("waktu").innerHTML="";
+                }
+            });
+        });
+    </script>
+</html>
