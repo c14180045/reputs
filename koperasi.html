@@ -41,12 +41,12 @@
                 <label for='name'>Masukkan Nama Pengaju Pinjaman</label>
                 <input type='text' name='name' id='name' value=''>
                 <label for='jumlah'>Masukkan Jumlah Pinjaman</label>
-                <input type='number' name='jumlah' id='jumlah' value=''>
+                <input type='te' name='jumlah' id='jumlah' value=''>
                 <label for='waktu'>Masukkan Waktu Pinjaman (bulan)</label>
                 <input type='range' name='waktu' id='waktu' value='1' min='1' max='24'>
                 <button id='hitung'>Ajukan Pinjaman!</button>
-                <label for='akhirtotal'>Total Pinjaman:</label>
-                <input type='number' name='akhirtotal' id='akhirtotal'>
+                <label for="textarea-1">Total Pengembalian :</label>
+                <textarea name="textarea-1" id="akhirtotal"></textarea>
             </div>
         </div>
         <div data-role='page' id='info'>
@@ -99,7 +99,7 @@
         $("#hitung").click(function(){
             alert("tes");
             nama=document.getElementById("nama").val();
-            pinjaman= document.getElementById("jumlah").val();
+            pinjaman=document.getElementById("jumlah").val();
             waktu=document.getElementById("waktu").val();
                 if (waktu<=6){
                     total=parseInt(pinjaman)+parseInt(pinjaman)*0.02*parseInt(waktu);
@@ -109,7 +109,7 @@
                 }else if(waktu>12){
                     total=parseInt(pinjaman)+parseInt(pinjaman)*0.01*parseInt(waktu);
                 }
-                document.getElementById("akhirtotal").innerHTML=total;
+                document.getElementById("akhirtotal").val(total.toString());
                 nama=document.getElementById("nama").val();
                 pinjaman= document.getElementById("jumlah").val();
                 waktu=document.getElementById("waktu").val();
