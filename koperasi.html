@@ -4,7 +4,8 @@
         <title>Koperasi</title>
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
         <script src="http://code.jquery.com/jquery.min.js"></script>
-	    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     <body>
         <div data-role='page' id='home'>
@@ -13,7 +14,7 @@
                 <div data-role='navbar'>
                     <ul>
                         <li><a href="#home" data-icon="home">Home</a></li>
-                        <li><a href="#" data-icon="gear">Pinjaman</a></li>
+                        <li><a href="#input" data-icon="gear">Pinjaman</a></li>
                         <li><a href="#info" data-icon="info">Info Pinjaman</a></li>
                     </ul>
                 </div>
@@ -25,42 +26,120 @@
                 </div>
             </div>
         </div>
+        <div data-role='page' id='input'> 
+            <div data-role='header'>
+                <h1>Koperasi App</h1>
+                <div data-role='navbar'>
+                    <ul>
+                        <li><a href="#home" data-icon="home">Home</a></li>
+                        <li><a href="#input" data-icon="gear">Pinjaman</a></li>
+                        <li><a href="#info" data-icon="info">Info Pinjaman</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div role='main' class='ui-content'>
+                <label for='name'>Masukkan Nama Pengaju Pinjaman</label>
+                <input type='text' name='name' id='name' value=''>
+                <label for='jumlah'>Masukkan Jumlah Pinjaman</label>
+                <input type='number' name='jumlah' id='jumlah' value=''>
+                <label for='waktu'>Masukkan Waktu Pinjaman (bulan)</label>
+                <input type='range' name='waktu' id='waktu' value='1' min='1' max='24'>
+                <button id='hitung'>Ajukan Pinjaman!</button>
+                <label for='akhirtotal'>Total Pinjaman:</label>
+                <input type='number' name='akhirtotal' id='akhirtotal'>
+            </div>
+        </div>
         <div data-role='page' id='info'>
             <div data-role='header'>
                 <h1>Koperasi App</h1>
                 <div data-role='navbar'>
                     <ul>
                         <li><a href="#home" data-icon="home">Home</a></li>
-                        <li><a href="#" data-icon="gear">Pinjaman</a></li>
+                        <li><a href="#input" data-icon="gear">Pinjaman</a></li>
                         <li><a href="#info" data-icon="info">Info Pinjaman</a></li>
                     </ul>
                 </div>
             </div>
             <div role="main" class="ui-content">
-                <h1>Info Pinjaman</h1>>
-                <div data-role="content">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Pinjaman</th>
-                                <th>Waktu Pinjaman</th>
-                                <th>Total Pengembalian</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
+                <h1>Info Pinjaman</h1>
+                <table data-role="table" data-mode="column-toggle">
+                     <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Pinjaman</th>
+                            <th>Waktu Pinjaman</th>
+                            <th>Total Pengembalian</th>
+                        </tr>
+                    </thead>
+                    <tbody id='tx'>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>
 </html>
-
-<script>
+<script type="text/javascript">
     $(function(){
         $("div.box").on("swipe", swipeHandler);
         function swipeHandler(event){
             $(event.target).addClass("swipe");
         }
+    });
+    $(document).ready(function(){
+        var nama;
+        var pinjaman;
+        var waktu;
+        var total;
+        $("#hitung").click(function(){
+            alert("tes");
+            nama=document.getElementById("nama").val();
+            pinjaman= document.getElementById("jumlah").val();
+            waktu=document.getElementById("waktu").val();
+                if (waktu<=6){
+                    total=parseInt(pinjaman)+parseInt(pinjaman)*0.02*parseInt(waktu);
+                }
+                else if(waktu<=12){
+                    total=parseInt(pinjaman)+parseInt(pinjaman)*0.015*parseInt(waktu);
+                }else if(waktu>12){
+                    total=parseInt(pinjaman)+parseInt(pinjaman)*0.01*parseInt(waktu);
+                }
+                document.getElementById("akhirtotal").innerHTML=total;
+                nama=document.getElementById("nama").val();
+                pinjaman= document.getElementById("jumlah").val();
+                waktu=document.getElementById("waktu").val();
+                document.getElementById("nama").innerHTML="";
+                document.getElementById("jumlah").innerHTML="";
+                document.getElementById("waktu").innerHTML="";
+                addToTable(nama, pinjaman, waktu, total);
+                alert("added");
+        });
+    });
+    function addToTable(nama, jumlah, waktu, total){
+        var tableBody = $("#tx");
+        var add = "<tr><td>" + nama + "</td><td>" + jumlah + "</td><td>" + waktu + "</td><td>" + total + "</td></tr>";
+        tableBody.append(add);
+        };
+
+    $(function(){
+       $("div.box").on("swipe", swipeHandler);
+       function swipeHandler(event){
+          $(event.target).addClass("swipe");
+       }
+     });
+
+    $(document).on("pageshow","#home",function(){
+        alert("Welcome To Home!");
+    });
+    $(document).on("pageshow","#input",function(){
+        alert("Welcome To Input!");
+    });
+    $(document).on("pageshow","#info",function(){
+        alert("Welcome To Info!");
     });
 </script>
